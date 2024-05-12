@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, test } from '@jest/globals';
 import MesaExamen from '../Classes/MesaExamen';
 import { Modificado, Publicado, Finalizado, Borrado } from '../Classes/Patterns/States';
 import Comision from '../Classes/Comision';
-import Modalidad from '../Classes/Modalidad';
+import {Modalidad, Presencial, Digital} from '../Classes/Modalidad'
 import Docente from '../Classes/Docente';
 
 describe('State Pattern Tests', () => {
@@ -16,7 +16,7 @@ const doc3 =new Docente("hola@asd.com", "Martin", "Perez", "3794525252", "445552
 
   beforeEach(() => {
     comision = new Comision(doc1, doc2, doc3); // Asumiendo que Comision puede ser instanciado sin argumentos o ajusta según tu implementación
-    modalidad = new Modalidad(); // Asumiendo que Modalidad puede ser instanciado sin argumentos o ajusta según tu implementación
+    modalidad = new Presencial("Presencial", "Aula 14"); // Asumiendo que Modalidad puede ser instanciado sin argumentos o ajusta según tu implementación
     mesaExamen = new MesaExamen("Cálculo", comision, new Date(), "08:00", modalidad);
   });
 

@@ -1,7 +1,7 @@
 import Docente from './Docente'
 import Comision from './Comision'
 import {Estado, Publicado} from './Patterns/States'
-import Modalidad from './Modalidad'
+import {Modalidad, Presencial, Digital} from './Modalidad'
 import {Notificador} from './Patterns/Observer'
 
 export default class MesaExamen{
@@ -16,7 +16,7 @@ export default class MesaExamen{
           this.nombreCatedra = nombre;
           this.fecha = fecha;
           this.comision = comision;
-          this.notificador = new Notificador();
+          this.notificador = new Notificador(this, fecha);
           this.modalidad = modalidad;
           this.estado = new Publicado(this);
      }
@@ -24,7 +24,7 @@ export default class MesaExamen{
      public getEstado(): Estado{
           return this.estado;
      }
-     
+
      public setEstado(estado: Estado):void {
           this.estado = estado;
      }

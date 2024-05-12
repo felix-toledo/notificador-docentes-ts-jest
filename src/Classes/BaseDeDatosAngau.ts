@@ -1,14 +1,17 @@
 import Directivo from './Directivo';
 import Docente from './Docente';
+import MesaExamen from './MesaExamen';
 
 export default class BDD {
     private static instance: BDD;
     private directivos: Array<Directivo>;
     private docentes: Array<Docente>;
+    private mesas: Array<MesaExamen>;
 
     private constructor() {
         this.directivos = [];
         this.docentes = [];
+        this.mesas = [];
     }
 
     public static getInstance(): BDD {
@@ -35,6 +38,9 @@ export default class BDD {
     }
 
     public getDocente(){
-     
+
     }
+
+    //addMesa
+    //getMesa
 }
