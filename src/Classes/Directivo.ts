@@ -6,8 +6,8 @@ export default class Directivo extends Persona implements IElemento{
      private usuario: string;
      private contrasena: string;
 
-     constructor(mail: string, pass: string, name: string, surname: string, number: string){
-          super(name, surname, mail, number);
+     constructor(mail: string, pass: string, name: string, surname: string, number: string, dni: string){
+          super(name, surname, mail, number, dni);
           this.usuario = mail;
           this.contrasena = pass;
      }

@@ -6,8 +6,8 @@ import BDD from "../BaseDeDatosAngau"
 export default class CreadorDocenteVisitor implements IVisitor {
      private docente: Docente;
 
-     constructor(nombre: string, apellido: string, correo: string, numero: string){
-          this.docente = new Docente(correo, nombre, apellido, numero);
+     constructor(nombre: string, apellido: string, correo: string, numero: string, dni: string){
+          this.docente = new Docente(correo, nombre, apellido, numero, dni);
 
      }
 

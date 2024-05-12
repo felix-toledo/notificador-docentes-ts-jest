@@ -4,8 +4,8 @@ import { Medios } from './Medios'
 export default class Docente extends Persona {
      private mediosPreferidos: Array<Medios>;
 
-     constructor(mail: string, name: string, surname: string, number: string){
-          super(name, surname, mail, number);
+     constructor(mail: string, name: string, surname: string, number: string, dni: string){
+          super(name, surname, mail, number, dni);
           this.mediosPreferidos = [];
      }
 

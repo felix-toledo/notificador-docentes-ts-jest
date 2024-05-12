@@ -33,4 +33,8 @@ export default class BDD {
     public getDocentes(): Array<Docente> {
         return this.docentes;
     }
+
+    public getDocente(){
+     
+    }
 }

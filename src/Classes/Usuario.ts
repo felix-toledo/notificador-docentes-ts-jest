@@ -20,8 +20,8 @@ export default class Usuario {
           }
      }
 
-     public registrarseEnBD(mail: string, pass: string, name: string, surname: string, number: string): void {
-          const nuevoDirectivo = new Directivo(mail, pass, name, surname, number);
+     public registrarseEnBD(mail: string, pass: string, name: string, surname: string, number: string, dni: string): void {
+          const nuevoDirectivo = new Directivo(mail, pass, name, surname, number, dni);
           this.basedd.addDirectivo(nuevoDirectivo);
      }
 
