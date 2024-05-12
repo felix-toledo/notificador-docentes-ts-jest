@@ -8,22 +8,22 @@ export default class Usuario {
 
      constructor() {
           this.sesion = null;
-          this.basedd = new BDD();
+          this.basedd = BDD.getInstance();
      }
    
      public iniciarSesion(us: string, pass: string): void {
-          const directivo = this.basedd.getDirectivos(us, pass);
+          const directivo = this.basedd.getDirectivo(us, pass);
           if (directivo) {
               this.sesion = new Sesion(directivo); 
           } else {
               this.sesion = null;
           }
-      }
+     }
 
-      public registrarseEnBD(mail: string, pass: string, name: string, surname: string, number: string): void {
+     public registrarseEnBD(mail: string, pass: string, name: string, surname: string, number: string): void {
           const nuevoDirectivo = new Directivo(mail, pass, name, surname, number);
           this.basedd.addDirectivo(nuevoDirectivo);
-      }
+     }
 
      public usuarioIniciado(): boolean{
           if (this.sesion){

@@ -1,6 +1,5 @@
 
 import {describe, expect, test} from '@jest/globals';
-import {sum} from '../sum';
 import Usuario from '../Classes/Usuario'
 
 

@@ -1,6 +1,8 @@
 import Persona from './Persona'
+import IElemento from "./Interfaces/IElemento"
+import IVisitor from "./Interfaces/IVisitor"
 
-export default class Directivo extends Persona {
+export default class Directivo extends Persona implements IElemento{
      private usuario: string;
      private contrasena: string;
 
@@ -16,6 +18,30 @@ export default class Directivo extends Persona {
 
      public getContrasena(): string {
           return this.contrasena;
+     }
+
+     public crearMesa(): void{
+
+     }
+
+     public crearComision(): void{
+          
+     }
+
+     public eliminarMesa(): void{
+          
+     }
+
+     public modificarMesa(): void{
+          
+     }
+
+     public generarReporte(): void{
+          
+     }
+     
+     accept(ivisitor: IVisitor): void{
+          ivisitor.visit(this);
      }
 
 }
