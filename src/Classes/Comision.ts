@@ -14,6 +14,10 @@ export default class Comision{
           this.vocalesConfirman = [false, false];
      }
 
+     public mensajeComision(): string{
+     return `Presidente: ${this.presidente.getNombreCompleto()} - Vocales: ${this.vocales.map(vocal => vocal.getNombreCompleto()).join(', ')}`;
+     }
+
      // Getters
      public getPresidente(): Docente {
           return this.presidente;

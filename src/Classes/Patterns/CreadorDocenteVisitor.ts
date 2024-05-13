@@ -14,5 +14,8 @@ export default class CreadorDocenteVisitor implements IVisitor {
      public visit(directivo: Directivo): void{
           const bdd = BDD.getInstance();
           bdd.addDocente(this.docente);
+          
      }
+
+     
 }

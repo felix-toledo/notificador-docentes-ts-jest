@@ -16,44 +16,43 @@ const doc3 =new Docente("hola@asd.com", "Martin", "Perez", "3794525252", "445552
 
   beforeEach(() => {
     comision = new Comision(doc1, doc2, doc3); // Asumiendo que Comision puede ser instanciado sin argumentos o ajusta según tu implementación
-    modalidad = new Presencial("Presencial", "Aula 14"); // Asumiendo que Modalidad puede ser instanciado sin argumentos o ajusta según tu implementación
-    mesaExamen = new MesaExamen("Cálculo", comision, new Date(), "08:00", modalidad);
+    modalidad = new Presencial("Aula 14"); // Asumiendo que Modalidad puede ser instanciado sin argumentos o ajusta según tu implementación
+    mesaExamen = new MesaExamen("Cálculo", comision, "15/05/2023", "08:00", modalidad);
   });
 
   test('Initial State is Publicado', () => {
-    expect(mesaExamen.getEstado().constructor.name).toBe('Publicado');
+    expect(mesaExamen.getEstado().getNombre()).toBe('Publicado');
   });
 
   test('Change state to Modificado', () => {
-    mesaExamen.setEstado(new Modificado(mesaExamen));
-    expect(mesaExamen.getEstado().constructor.name).toBe('Modificado');
+    mesaExamen.getEstado().modificado();
+    expect(mesaExamen.getEstado().getNombre()).toBe('Modificado');
     expect(mesaExamen.getEstado().mensajeEstado()).toBe('La mesa ha sido modificada.');
   });
 
   test('Change state to Finalizado', () => {
-    mesaExamen.setEstado(new Finalizado(mesaExamen));
-    expect(mesaExamen.getEstado().constructor.name).toBe('Finalizado');
+    mesaExamen.getEstado().finalizado();
+    expect(mesaExamen.getEstado().getNombre()).toBe('Finalizado');
     expect(mesaExamen.getEstado().mensajeEstado()).toBe('La mesa ha sido finalizada.');
   });
 
   test('Change state to Borrado', () => {
-    mesaExamen.setEstado(new Borrado(mesaExamen));
-    expect(mesaExamen.getEstado().constructor.name).toBe('Borrado');
+    mesaExamen.getEstado().borrado();
+    expect(mesaExamen.getEstado().getNombre()).toBe('Borrado');
     expect(mesaExamen.getEstado().mensajeEstado()).toBe('La mesa ha sido borrada.');
   });
 
   test('State change invokes correct behavior', () => {
-    mesaExamen.setEstado(new Publicado(mesaExamen));
     mesaExamen.getEstado().publicado();
-    expect(mesaExamen.getEstado().constructor.name).toBe('Publicado');
+    expect(mesaExamen.getEstado().getNombre()).toBe('Publicado');
 
     mesaExamen.getEstado().modificado();
-    expect(mesaExamen.getEstado().constructor.name).toBe('Modificado');
+    expect(mesaExamen.getEstado().getNombre()).toBe('Modificado');
 
     mesaExamen.getEstado().finalizado();
-    expect(mesaExamen.getEstado().constructor.name).toBe('Finalizado');
+    expect(mesaExamen.getEstado().getNombre()).toBe('Finalizado');
 
     mesaExamen.getEstado().borrado();
-    expect(mesaExamen.getEstado().constructor.name).toBe('Borrado');
+    expect(mesaExamen.getEstado().getNombre()).toBe('Borrado');
   });
 });

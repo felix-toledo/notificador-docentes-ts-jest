@@ -1,8 +1,11 @@
 import Persona from './Persona'
+import BDD from './BaseDeDatosAngau'
+import Docente from './Docente'
 import IElemento from "./Interfaces/IElemento"
 import IVisitor from "./Interfaces/IVisitor"
 import MesaExamen from './MesaExamen'
 import Comision from './Comision'
+import CreadorDocenteVisitor from './Patterns/CreadorDocenteVisitor'
 import {Modalidad, Digital, Presencial} from './Modalidad'
 
 export default class Directivo extends Persona implements IElemento{
@@ -23,35 +26,66 @@ export default class Directivo extends Persona implements IElemento{
           return this.contrasena;
      }
 
-     public crearMesa(): void{
-          /*
+     public crearMesa(nombre: string, doc1: Docente, doc2: Docente, doc3: Docente, fecha: string, hora: string, tipoModalidad: string, lugar: string): void {
+          // Crear una nueva MesaExamen
+          const mesa = new MesaExamen(nombre, this.crearComision(doc1, doc2, doc3), fecha, hora, this.crearModalidad(tipoModalidad, lugar));
+      
+          // Obtener la instancia de la base de datos
           const bdd = BDD.getInstance();
-          bdd.addDocente(this.docente);*/
+      
+          // Agregar la nueva MesaExamen a la base de datos
+          bdd.addMesa(mesa);
+      }
+      
+      
 
-          //new MesaExamen(nombre, crearComision(), fecha, hora, crearModalidad())
-     }
-
-     public crearComision(doc1, doc2, doc3): Comision{
-          //tiene q poder acceder a comison
-          //con el visitor va creando deocentes
-          //comision tiene q tener 3 parametros de docentes
-          //new comision (doc1 doc2 doc3)
+      public crearComision(doc1: Docente, doc2: Docente, doc3: Docente): Comision {
+        const comision = this.crearComision(doc1, doc2, doc3);          
           return comision;
-     }
+      }
+      
+      
 
-     public crearModalidad(): Modalidad{
-          return modadlidad;
-     }
+      public crearModalidad(tipo: string, lugar: string): Modalidad {
+          let modalidad: Modalidad;
+          if (tipo === "Digital") {
+              modalidad = new Digital(lugar);
+          } else if (tipo === "Presencial") {
+              modalidad = new Presencial(lugar);
+          } else {
+              throw new Error("Tipo de modalidad no soportado");
+          }
+          return modalidad;
+      }
+      
 
-     public eliminarMesa(): void{
-          //busca la mesa en la bdd
-          //la elimina
-     }
+     public eliminarMesa(id: number): void {
+          // Obtener la instancia de la base de datos
+          const bdd = BDD.getInstance();
+          const mesaEncontrada = bdd.getMesa(id);
+          if (mesaEncontrada) {
+            mesaEncontrada.getEstado().borrado();
+            bdd.removeMesa(id);
+        }            
+      }
+      
+      
 
-     public modificarMesa(): void{
-          //dependiendo de que quiere modificar
-          //se modifica
-     }
+      public modificarMesa(mesa: MesaExamen): void {
+          // Obtener la instancia de la base de datos
+          const bdd = BDD.getInstance();
+      
+          // Buscar la mesa en la base de datos
+          var mesaEncontrada = bdd.getMesa(mesa.getId());
+      
+          // Si la mesa existe en la base de datos, modificar su estado 
+          if (mesaEncontrada) {
+              bdd.removeMesa(mesaEncontrada.getId());
+              mesa.getEstado().modificado();
+              bdd.addMesa(mesa);
+          }
+      }
+      
 
      public generarReporte(): void{
           //me devuelve todos los datos de la mesa (esta en el archivo de historias de usuario)
@@ -61,46 +95,5 @@ export default class Directivo extends Persona implements IElemento{
           ivisitor.visit(this);
      }
 
-
-     /*
-     public crearMesa(nombre: string, doc1: Docente, doc2: Docente, doc3: Docente, fecha: Date, hora: string, tipoModalidad: string, lugar: string): MesaExamen {
-        const comision = this.crearComision(doc1, doc2, doc3);
-        const modalidad = this.crearModalidad(tipoModalidad, lugar);
-        const mesa = new MesaExamen(nombre, comision, fecha, hora, modalidad);
-        const bdd = BDD.getInstance();
-        bdd.addMesaExamen(mesa);
-        return mesa;
-    }
-
-    public crearComision(doc1: Docente, doc2: Docente, doc3: Docente): Comision {
-        return new Comision(doc1, doc2, doc3);
-    }
-
-    public crearModalidad(tipo: string, lugar: string): Modalidad {
-        if (tipo === "Digital") {
-            return new Digital("Examen Digital", lugar);
-        } else {
-            return new Presencial("Examen Presencial", lugar);
-        }
-    }
-
-    public eliminarMesa(mesa: MesaExamen): void {
-        const bdd = BDD.getInstance();
-        bdd.removeMesaExamen(mesa);
-    }
-
-    public modificarMesa(mesa: MesaExamen, nuevosDatos: any): void {
-        // Aquí se debería implementar la lógica para modificar los datos de la mesa
-        // Esto es un ejemplo genérico, depende de qué datos se quieran modificar
-        mesa.update(nuevosDatos);
-        const bdd = BDD.getInstance();
-        bdd.updateMesaExamen(mesa);
-    }
-
-    public generarReporte(mesa: MesaExamen): string {
-        // Generar un reporte con todos los datos de la mesa
-        return `Reporte de la Mesa: ${mesa.getNombre()} - Modalidad: ${mesa.getModalidad().getNombre()}`;
-    }
-     */
 }
  

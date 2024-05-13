@@ -13,6 +13,14 @@ export default class Docente extends Persona {
           this.mediosPreferidos.push(medio);
      }
 
+     public getMedios(): Array<Medios>{
+          return this.mediosPreferidos;
+     }
+
+     public getNombreCompleto(){
+          return `${this.nombre} ${this.apellido}`
+     }
+
      // Acá no sé si agregar las bandejas de cada medio ya que técnicamente es una API, entonces en ese caso lo unico que haría es mostrar
      // con la API que mandé tal cosa a tal contacto.
 }

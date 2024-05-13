@@ -38,8 +38,28 @@ export default class BDD {
     }
 
     public getDocente(){
-
+    
     }
+    
+    // Añadir MesaExamen a la base de datos
+public addMesa(mesa: MesaExamen): void {
+    this.mesas.push(mesa);
+}
+
+public getMesas(): Array<MesaExamen>{
+    return this.mesas;
+}
+
+// Obtener MesaExamen de la base de datos
+public getMesa(id: number): MesaExamen {
+    return this.mesas.find(m => m.getId() === id) ;
+}
+
+// Eliminar MesaExamen de la base de datos
+public removeMesa(id: number): void {
+    this.mesas = this.mesas.filter(m => m.getId() !== id);
+}
+
 
     //addMesa
     //getMesa

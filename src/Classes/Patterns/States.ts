@@ -36,6 +36,10 @@ export abstract class Estado {
      public mensajeEstado(): string{
           return this.mensaje;
      }
+
+     public getNombre(): string{
+          return this.nombreEstado;
+     }
 }
  
 

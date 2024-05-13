@@ -22,16 +22,16 @@ export abstract class Modalidad{
 
 export class Digital extends Modalidad{
 
-     constructor(nombre: string, lugar: string){
-          super(nombre, lugar)
+     constructor(lugar: string){
+          super("Digital", lugar)
      }
 
 }
 
 export class Presencial extends Modalidad{
 
-     constructor(nombre: string, lugar: string){
-          super(nombre, lugar)
+     constructor(lugar: string){
+          super("Presencial", lugar)
      }
 
 }
