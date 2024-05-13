@@ -5,4 +5,8 @@ export default class Sesion {
      constructor (directivo: Directivo){
           this.directivo = directivo;
      }
+
+     public getDirectivo(){
+          return this.directivo;
+     }
 }

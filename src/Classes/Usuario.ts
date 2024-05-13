@@ -11,10 +11,11 @@ export default class Usuario {
           this.basedd = BDD.getInstance();
      }
    
-     public iniciarSesion(us: string, pass: string): void {
+     public iniciarSesion(us: string, pass: string){
           const directivo = this.basedd.getDirectivo(us, pass);
           if (directivo) {
               this.sesion = new Sesion(directivo); 
+              return this.sesion.getDirectivo();
           } else {
               this.sesion = null;
           }
